@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Settlement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -18,8 +19,6 @@ class FetchAPIController extends Controller
     {
         $districts = ["NAXÇIVAN", "ŞƏRUR", "SƏDƏRƏK", "ŞAHBUZ", "CULFA", "ORDUBAD", "BABƏK", "KƏNGƏRLİ"];
 
-        $districts = ["ŞƏRUR", "SƏDƏRƏK", "ŞAHBUZ", "CULFA", "ORDUBAD", "BABƏK", "KƏNGƏRLİ"];
-
         foreach ($districts as $district)
         {
 //1C part START
@@ -66,22 +65,36 @@ class FetchAPIController extends Controller
 
             //parse jwt start
             $response = json_decode($response);
-            var_dump($response->rows[0]) . "<br>";
-            continue;
 
             $district_db = new District();
             $district_db->name = $district;
             if(array_key_exists(0,$response->rows))
             {
-//                $district_db->type=
+                $district_db->type=$response->rows[0]->cnt_districts[0]->type;
+                $district_db->x=$response->rows[0]->cnt_districts[0]->x;
+                $district_db->y=$response->rows[0]->cnt_districts[0]->y;
             }
+            $district_db->save();
 
         }
     }
-
     public function FetchSettlements()
     {
+        $districts=District::all();
 
+        foreach ($districts as $district)
+        {
+            echo $district->name."<br>";continue;
+            $settlement_db = new Settlement();
+            $settlement_db->name = $response->rows[1]->settlements;
+            $settlement_db->district_id = $district->id;
+
+                $district_db->type=$response->rows[0]->cnt_districts[0]->type;
+                $district_db->x=$response->rows[0]->cnt_districts[0]->x;
+                $district_db->y=$response->rows[0]->cnt_districts[0]->y;
+                $district_db->save();
+
+        }
     }
 
     public function FetchRoads()
@@ -91,6 +104,8 @@ class FetchAPIController extends Controller
 
     public function Fetch()
     {
+//        $this->FetchDistricts();die();
+//        $this->FetchSettlements();die();
         $districts = ["ŞƏRUR", "SƏDƏRƏK", "ŞAHBUZ", "CULFA", "ORDUBAD", "BABƏK", "KƏNGƏRLİ"];
 
         foreach ($districts as $district)
@@ -139,7 +154,7 @@ class FetchAPIController extends Controller
 
             //parse jwt start
             $response = json_decode($response);
-            var_dump($response->rows[0]->cnt_districts[0]->x) . "<br>";
+            var_dump($response->rows[1]->settlements) . "<br>";
             continue;
             //1C part END
 

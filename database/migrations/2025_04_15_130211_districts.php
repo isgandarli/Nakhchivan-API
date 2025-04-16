@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->unsignedSmallInteger('type')->nullable(true);
-            $table->decimal('x',15,12)->nullable(true);
-            $table->decimal('y      ',15,12)->nullable(true);
+            $table->decimal('x',15,13)->nullable(true);
+            $table->decimal('y',15,13)->nullable(true);
             $table->softDeletes();
             $table->timestamps();
         });

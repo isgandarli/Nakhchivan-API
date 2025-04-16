@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->nullable(false);
             $table->unsignedSmallInteger('type')->nullable(false);
             $table->decimal('x',15,12);
-            $table->decimal('y      ',15,12);
+            $table->decimal('y',15,12);
             $table->softDeletes();
             $table->timestamps();
         });

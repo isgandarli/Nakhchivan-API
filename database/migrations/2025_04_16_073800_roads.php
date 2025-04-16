@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('name')->nullable(false);
             $table->decimal('x',15,12);
-            $table->decimal('y      ',15,12);
+            $table->decimal('y',15,12);
             $table->softDeletes();
             $table->timestamps();
         });
