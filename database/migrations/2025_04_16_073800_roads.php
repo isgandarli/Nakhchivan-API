@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('district_id')->unsigned()->nullable(false);
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('name')->nullable(false);
+            $table->unsignedSmallInteger('type')->nullable(false);
             $table->decimal('x',15,12);
             $table->decimal('y',15,12);
             $table->softDeletes();

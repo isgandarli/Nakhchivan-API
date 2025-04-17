@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->bigInteger('api_id')->unsigned()->nullable(true);
-            $table->unsignedSmallInteger('type')->nullable(true);
+            $table->unsignedSmallInteger('type')->nullable(false);
             $table->decimal('x',15,13)->nullable(true);
             $table->decimal('y',15,13)->nullable(true);
             $table->softDeletes();

@@ -89,8 +89,9 @@ class FetchAPIController extends Controller
         $response = json_decode($response);
 //        var_dump($response->names->roads);die();
 
-        $api_id=explode('_',$data)[1];
-        $district_id=District::where('api_id',$api_id)->value('id');
+        $type = explode('_', $data)[0];
+        $api_id = explode('_', $data)[1];
+        $district_id = District::where('api_id', $api_id)->value('id');
 
         foreach ($response->names->roads as $road)
         {
@@ -98,6 +99,7 @@ class FetchAPIController extends Controller
             $road_db->api_id = $road->id;
             $road_db->district_id = $district_id;
             $road_db->name = $road->name;
+            $road_db->type = $type;
             $road_db->x = $road->x;
             $road_db->y = $road->y;
             $road_db->save();
@@ -106,7 +108,7 @@ class FetchAPIController extends Controller
 
     public function Fetch()
     {
-        $districts = ["NAXÇIVAN", "ŞƏRUR", "SƏDƏRƏK", "ŞAHBUZ", "CULFA", "ORDUBAD", "BABƏK", "KƏNGƏRLİ"];
+        $districts = ["naxçıvan", "ŞƏRUR", "SƏDƏRƏK", "ŞAHBUZ", "CULFA", "ORDUBAD", "BABƏK", "KƏNGƏRLİ"];
 
         foreach ($districts as $district)
         {
