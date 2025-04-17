@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
+            $table->bigInteger('api_id')->unsigned()->nullable(true);
             $table->unsignedSmallInteger('type')->nullable(true);
             $table->decimal('x',15,13)->nullable(true);
             $table->decimal('y',15,13)->nullable(true);
